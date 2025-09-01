@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -62,5 +63,15 @@ public class ProdutoController {
     //Retorna uma lista de produto 
     public List<Produto> listar(){
         return bd.findAll();
+    }
+
+    @GetMapping("/api/produtos/vitrine")
+    public List<Produto> mostrarVitrine() {
+        return bd.listarVitrine();
+    }
+
+    @GetMapping("/api/produtos/busca")
+    public List<Produto> buscarProdutos(@RequestParam String termo) {
+        return bd.fazerBusca(termo);
     }
  }
